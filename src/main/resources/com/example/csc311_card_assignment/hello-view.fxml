@@ -8,12 +8,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-
 <VBox fx:id="Main_vbox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="327.0" prefWidth="600.0" style="-fx-background-color: #008000;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox prefHeight="45.0" prefWidth="600.0">
          <children>
-            <Button mnemonicParsing="false" prefHeight="24.0" prefWidth="78.0" text="Button">
+            <Button fx:id="hintButton" mnemonicParsing="false" prefHeight="24.0" prefWidth="78.0" text="Hint">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -21,39 +20,31 @@
                   <Insets left="10.0" top="10.0" />
                </HBox.margin>
             </Button>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="32.0" prefWidth="206.0" style="-fx-background-color: white;" text="Label">
+            <Button fx:id="drawButton" alignment="CENTER" mnemonicParsing="false" onAction="#drawCards" prefHeight="26.0" prefWidth="73.0" text="Draw">
                <HBox.margin>
-                  <Insets left="100.0" top="5.0" />
-               </HBox.margin>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-            </Label>
-            <Button mnemonicParsing="false" prefHeight="23.0" prefWidth="98.0" text="Button">
-               <HBox.margin>
-                  <Insets left="75.0" top="10.0" />
+                  <Insets left="400.0" top="10.0" />
                </HBox.margin>
             </Button>
          </children>
       </HBox>
       <HBox prefHeight="279.0" prefWidth="600.0">
          <children>
-            <ImageView fitHeight="200.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="firstCard" fitHeight="200.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                <HBox.margin>
                   <Insets left="25.0" top="10.0" />
                </HBox.margin>
             </ImageView>
-            <ImageView fitHeight="200.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="secondCard" fitHeight="200.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                <HBox.margin>
                   <Insets left="50.0" top="10.0" />
                </HBox.margin>
             </ImageView>
-            <ImageView fitHeight="200.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="thirdCard" fitHeight="200.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                <HBox.margin>
                   <Insets left="50.0" top="10.0" />
                </HBox.margin>
             </ImageView>
-            <ImageView fitHeight="200.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="fourthCard" fitHeight="200.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                <HBox.margin>
                   <Insets left="50.0" top="10.0" />
                </HBox.margin>
