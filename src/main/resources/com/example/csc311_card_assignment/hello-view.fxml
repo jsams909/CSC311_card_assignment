@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id="Main_vbox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="327.0" prefWidth="600.0" style="-fx-background-color: #008000;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="Main_vbox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="327.0" prefWidth="600.0" style="-fx-background-color: #008000;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.csc311_card_assignment.HelloController">
    <children>
       <HBox prefHeight="45.0" prefWidth="600.0">
          <children>
@@ -20,7 +20,7 @@
                   <Insets left="10.0" top="10.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="drawButton" alignment="CENTER" mnemonicParsing="false" onAction="#drawCards" prefHeight="26.0" prefWidth="73.0" text="Draw">
+            <Button fx:id="drawButton" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#drawCards" prefHeight="26.0" prefWidth="73.0" text="Draw">
                <HBox.margin>
                   <Insets left="400.0" top="10.0" />
                </HBox.margin>

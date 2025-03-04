@@ -29,15 +29,19 @@ public class Cards {
         this.answer = "";
     }
     public void generateCards(){
-    ImageView[] currentCards = new ImageView[4];
+        //this.deck.clear();
+    //ImageView[] currentCards = new ImageView[4];
         for(int i = 0; i<4; i++){
-        int randomIndex = random.nextInt(cards.length);  // Get a random index
-            while (this.deck.contains(cards[randomIndex])) {
-        Image card = new Image("file:" + cards[randomIndex]);  // Load the random image
+        int randomCard = random.nextInt(52);  // Get a random index
+            while (this.deck.contains(cards[randomCard])) {
+                randomCard = random.nextInt(cards.length);
+            }
+            this.deck.add(cards[randomCard]);
+      // Image card = new Image("file:" + cards[randomCard]);  // Load the random image
         //currentCards[i] = new ImageView(card);
     }}
 
 
 
 
-}}
+}
