@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class HelloController {
+
 private Cards cards = new Cards();
 
     @FXML
@@ -37,13 +38,13 @@ private Cards cards = new Cards();
 
     @FXML
     void drawCards(MouseEvent event) {
-        cards.Shuffle((List) cards);
-        cards.addDeck();
+        Cards.Shuffle(cards);
+        //cards.addDeck();
 
-        firstCard.setImage(new Image(getClass().getResourceAsStream("images/" + cards.deck.get(0))));
-        secondCard.setImage(new Image(getClass().getResourceAsStream("images/" + cards.deck.get(1))));
-        thirdCard.setImage(new Image(getClass().getResourceAsStream("images/" + cards.deck.get(2))));
-        fourthCard.setImage(new Image(getClass().getResourceAsStream("images/" + cards.deck.get(3))));
+        firstCard.setImage(new Image(getClass().getResourceAsStream("images/" + cards.cards[0])));
+        secondCard.setImage(new Image(getClass().getResourceAsStream("images/" + cards.cards[1])));
+        thirdCard.setImage(new Image(getClass().getResourceAsStream("images/" + cards.cards[2])));
+        fourthCard.setImage(new Image(getClass().getResourceAsStream("images/" + cards.cards[3])));
 
     }}
 

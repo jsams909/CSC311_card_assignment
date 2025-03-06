@@ -3,9 +3,10 @@ package com.example.csc311_card_assignment;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+
 import java.util.*;
 
-public class Cards {
+public class Cards{
 
     String answer;
 
@@ -23,17 +24,17 @@ public class Cards {
             "king_of_spades.png", "ace_of_spades.png"};
 
 
-    ArrayList<String> deck = new ArrayList<>();
-     void addDeck()
+    //ArrayList<String> deck = new ArrayList<>();
+     //void addDeck(){
 
-    {
-        deck.addAll(Arrays.asList(cards));
-    }
-     public static void Shuffle(List deck){
-         Collections.shuffle(deck);
+       // deck.addAll(Arrays.asList(cards));
+    //}
+       Random random = new Random();
+     public static void Shuffle(){
+
      }
 /**
-     Random random = new Random();
+
     public void cards() {
         this.deck = new ArrayList<String>();
         this.answer = "";
