@@ -30,8 +30,18 @@ public class Cards{
        // deck.addAll(Arrays.asList(cards));
     //}
        Random random = new Random();
-     public static void Shuffle(){
+     public void Shuffle(){
+         for(int i=0; i<cards.length; i++) {
+             int index = random.nextInt(cards.length);
+             Image card = new Image("file:" + cards[index]);
 
+             //int firstCard = random.nextInt(cards.length);
+             //int secondCard = random.nextInt(cards.length);
+             //int thirdCard = random.nextInt(cards.length);
+             //int fourthCard = random.nextInt(cards.length);
+         }
+
+         }
      }
 /**
 
@@ -51,7 +61,7 @@ public class Cards{
       // Image card = new Image("file:" + cards[randomCard]);  // Load the random image
         //currentCards[i] = new ImageView(card);
  }}*/
-    }
+
 
 
 
