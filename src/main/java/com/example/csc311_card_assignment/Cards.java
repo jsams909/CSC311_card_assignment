@@ -3,11 +3,10 @@ package com.example.csc311_card_assignment;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-import java.util.ArrayList;
-import java.util.Random;
+import java.util.*;
 
 public class Cards {
-    ArrayList<String> deck;
+
     String answer;
 
      String[] cards={"2_of_clubs.png", "3_of_clubs.png", "4_of_clubs.png", "5_of_clubs.png",
@@ -23,6 +22,17 @@ public class Cards {
             "8_of_spades.png", "9_of_spades.png", "10_of_spades.png", "jack_of_spades.png", "queen_of_spades.png",
             "king_of_spades.png", "ace_of_spades.png"};
 
+
+    ArrayList<String> deck = new ArrayList<>();
+     void addDeck()
+
+    {
+        deck.addAll(Arrays.asList(cards));
+    }
+     public static void Shuffle(List deck){
+         Collections.shuffle(deck);
+     }
+/**
      Random random = new Random();
     public void cards() {
         this.deck = new ArrayList<String>();
@@ -39,9 +49,10 @@ public class Cards {
             this.deck.add(cards[randomCard]);
       // Image card = new Image("file:" + cards[randomCard]);  // Load the random image
         //currentCards[i] = new ImageView(card);
-    }}
+ }}*/
+    }
 
 
 
 
-}
+

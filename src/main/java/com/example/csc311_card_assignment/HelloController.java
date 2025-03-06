@@ -7,6 +7,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
+import java.util.List;
 import java.util.Objects;
 
 public class HelloController {
@@ -36,7 +37,9 @@ private Cards cards = new Cards();
 
     @FXML
     void drawCards(MouseEvent event) {
-        cards.generateCards();
+        cards.Shuffle((List) cards);
+        cards.addDeck();
+
         firstCard.setImage(new Image(getClass().getResourceAsStream("images/" + cards.deck.get(0))));
         secondCard.setImage(new Image(getClass().getResourceAsStream("images/" + cards.deck.get(1))));
         thirdCard.setImage(new Image(getClass().getResourceAsStream("images/" + cards.deck.get(2))));
