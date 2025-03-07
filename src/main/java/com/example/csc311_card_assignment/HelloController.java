@@ -52,31 +52,29 @@ public class HelloController {
     @FXML
     void verifyAction(ActionEvent event) {
         try {
-            // Get the text from the text field
-            String expression = expressionBar.getText().trim();
 
-            // Create a simple expression evaluator
-            // You may need to implement or use a library for this
-            double numericResult = evaluateExpression(expression);
+            String expression = expressionBar.getText();
 
-            // Check if the result equals 24
-            if (Math.abs(numericResult - 24.0) < 0.0001) {
-                // Success case
+
+            double result = evaluateExpression(expression);
+
+            //Google told me this was would fix my error when I just did result ==24
+            if (Math.abs(result - 24.0) < 0.0001) {
+
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Success");
+                alert.setTitle("Correct Answer");
                 alert.setHeaderText("Correct!");
                 alert.setContentText("The expression evaluates to 24.");
                 alert.showAndWait();
             } else {
-                // Incorrect result
+
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Incorrect");
                 alert.setHeaderText("Wrong Answer");
-                alert.setContentText("The expression evaluates to " + numericResult + ", not 24.");
+                alert.setContentText("The expression evaluates to " + result + ", not 24.");
                 alert.showAndWait();
             }
         } catch (Exception e) {
-            // Handle parsing errors or invalid expressions
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Invalid Expression");
@@ -85,15 +83,13 @@ public class HelloController {
         }
     }
 
-    // A simple expression evaluator that handles basic operations
+//I pulled this method off google to evaluate my expression
     private double evaluateExpression(String expression) {
         try {
-            // Remove all whitespace
+
             expression = expression.replaceAll("\\s+", "");
 
-            // Use a third-party library or implement your own parser
-            // For simplicity, here's a very basic implementation that can handle
-            // addition, subtraction, multiplication, and division with proper precedence
+
             String finalExpression = expression;
             return new Object() {
                 int pos = -1, ch;
@@ -118,10 +114,6 @@ public class HelloController {
                     return x;
                 }
 
-                // Grammar:
-                // expression = term | expression `+` term | expression `-` term
-                // term = factor | term `*` factor | term `/` factor
-                // factor = `+` factor | `-` factor | `(` expression `)` | number
 
                 double parseExpression() {
                     double x = parseTerm();
@@ -179,18 +171,15 @@ public class HelloController {
             "king_of_spades.png", "ace_of_spades.png"};
 
 
-    //ArrayList<String> deck = new ArrayList<>();
-    //void addDeck(){
 
-    // deck.addAll(Arrays.asList(cards));
-    //}
+
     Random random = new Random();
+    //I used the "Fisher Yates" shuffle algorithm
     public void shuffle(){
         int n = cards.length;
         Random random = new Random();
         for (int i = n - 1; i > 0; i--) {
-            int j = random.nextInt(i + 1); // Generate a random index from 0 to i
-            // Swap the current element with the randomly selected element
+            int j = random.nextInt(i + 1);
             String temp = cards[i];
             cards[i] = cards[j];
             cards[j] = temp;
@@ -204,11 +193,6 @@ public class HelloController {
         fourthCard.setImage(new Image(cards[1]));
         secondCard.setImage(new Image(cards[2]));
         thirdCard.setImage(new Image(cards[3]));
-
-        //firstCard.setImage(new Image(getClass().getResourceAsStream("images/" + cards.cards[0])));
-        //secondCard.setImage(new Image(getClass().getResourceAsStream("images/" + cards.cards[1])));
-        //thirdCard.setImage(new Image(getClass().getResourceAsStream("images/" + cards.cards[2])));
-        //fourthCard.setImage(new Image(getClass().getResourceAsStream("images/" + cards.cards[3])));
 
     }}
 
