@@ -10,7 +10,25 @@ public class Cards{
 
     String answer;
 
-     String[] cards={"2_of_clubs.png", "3_of_clubs.png", "4_of_clubs.png", "5_of_clubs.png",
+    private final Cards.CardValue cardValue;
+    private final Cards.CardSuit cardSuit;
+
+    public Cards(Cards.CardValue cardValue, Cards.CardSuit cardSuit){
+        this.cardValue = cardValue;
+        this.cardSuit = cardSuit;
+    }
+    public HelloController.CardValue getCardValue(){
+        return cardValue;
+    }
+    public HelloController.CardSuit getCardSuit(){
+        return cardSuit;
+    }
+    public String toString(){
+        return String.format("%s: %s", cardValue, cardSuit);
+    }
+
+
+    String[] cards = {"2_of_clubs.png", "3_of_clubs.png", "4_of_clubs.png", "5_of_clubs.png",
             "6_of_clubs.png", "7_of_clubs.png", "8_of_clubs.png", "9_of_clubs.png", "10_of_clubs.png", "jack_of_clubs.png",
             "queen_of_clubs.png", "king_of_clubs.png", "ace_of_clubs.png", "2_of_diamonds.png",
             "3_of_diamonds.png", "4_of_diamonds.png", "5_of_diamonds.png", "6_of_diamonds.png",
@@ -25,15 +43,16 @@ public class Cards{
 
 
     //ArrayList<String> deck = new ArrayList<>();
-     //void addDeck(){
+    //void addDeck(){
 
-       // deck.addAll(Arrays.asList(cards));
+    // deck.addAll(Arrays.asList(cards));
     //}
-       Random random = new Random();
-     public void Shuffle(){
-         for(int i=0; i<cards.length; i++) {
-             int index = random.nextInt(cards.length);
-             Image card = new Image("file:" + cards[index]);
+    Random random = new Random();
+
+    public void Shuffle() {
+        for (int i = 0; i < cards.length; i++) {
+            int index = random.nextInt(cards.length);
+            Image card = new Image("file:" + cards[index]);
 
              //int firstCard = random.nextInt(cards.length);
              //int secondCard = random.nextInt(cards.length);

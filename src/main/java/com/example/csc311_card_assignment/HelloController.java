@@ -26,22 +26,7 @@ public enum CardValue{placeHolder, Ace, Two, Three, Four, Five, Six,
 
 public enum CardSuit{Clubs, Spades, Hearts, Diamonds};
 
-private final CardValue cardValue;
-private final CardSuit cardSuit;
 
-public HelloController(CardValue cardValue, CardSuit cardSuit){
-    this.cardValue = cardValue;
-    this.cardSuit = cardSuit;
-}
-public CardValue getCardValue(){
-    return cardValue;
-}
-public CardSuit getCardSuit(){
-    return cardSuit;
-}
-public String toString(){
-    return String.format("%s: %s", cardValue, cardSuit);
-}
     @FXML
     private VBox Main_vbox;
 
@@ -196,6 +181,7 @@ public String toString(){
     Random random = new Random();
     //I used the "Fisher Yates" shuffle algorithm
     public void shuffle(){
+        int count=0;
         int n = cards.length;
         Random random = new Random();
         for (int i = n - 1; i > 0; i--) {
@@ -203,8 +189,17 @@ public String toString(){
             String temp = cards[i];
             cards[i] = cards[j];
             cards[j] = temp;
+
+        }
+        for(Cards.CardSuit c : Cards.CardSuit.values()){
+            for(HelloController.CardValue v : HelloController.CardValue.values()){
+                cards[count]= String.valueOf(new HelloController(cardValue,cardSuit));
+                count++;
+            }
         }
     }
+
+
     @FXML
     void drawCards(MouseEvent event) {
 
