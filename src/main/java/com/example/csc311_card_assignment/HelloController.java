@@ -21,7 +21,27 @@ import java.util.Random;
 public class HelloController {
 
 //private Cards cardsClass = new Cards();
+public enum CardValue{placeHolder, Ace, Two, Three, Four, Five, Six,
+    Seven, Eight, Nine, Ten, Jack, Queen, King};
 
+public enum CardSuit{Clubs, Spades, Hearts, Diamonds};
+
+private final CardValue cardValue;
+private final CardSuit cardSuit;
+
+public HelloController(CardValue cardValue, CardSuit cardSuit){
+    this.cardValue = cardValue;
+    this.cardSuit = cardSuit;
+}
+public CardValue getCardValue(){
+    return cardValue;
+}
+public CardSuit getCardSuit(){
+    return cardSuit;
+}
+public String toString(){
+    return String.format("%s: %s", cardValue, cardSuit);
+}
     @FXML
     private VBox Main_vbox;
 
