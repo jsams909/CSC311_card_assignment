@@ -1,32 +1,54 @@
 package com.example.csc311_card_assignment;
 
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 
 import java.util.*;
 
-public class Cards{
+public class Cards {
 
     String answer;
 
-    private final Cards.CardValue cardValue;
-    private final Cards.CardSuit cardSuit;
+    public enum CardValue {
+        placeHolder, Ace, Two, Three, Four, Five, Six,
+        Seven, Eight, Nine, Ten, Jack, Queen, King
+    }
 
-    public Cards(Cards.CardValue cardValue, Cards.CardSuit cardSuit){
+    ;
+
+    public enum CardSuit {Clubs, Spades, Hearts, Diamonds}
+
+    ;
+     final CardValue cardValue;
+    final CardSuit cardSuit;
+
+    public Cards(CardValue cardValue, CardSuit cardSuit) {
         this.cardValue = cardValue;
         this.cardSuit = cardSuit;
     }
-    public HelloController.CardValue getCardValue(){
+
+    public CardValue getCardValue() {
         return cardValue;
     }
-    public HelloController.CardSuit getCardSuit(){
+
+    public CardSuit getCardSuit() {
         return cardSuit;
     }
-    public String toString(){
+
+    public String toString() {
         return String.format("%s: %s", cardValue, cardSuit);
     }
 
+    
+    public void cardsToObject(){
+    int count = 0;
+    
+        for(CardSuit c : CardSuit.values()){
+        for(CardValue v : CardValue.values()){
+            cards[count]= String.valueOf(new Cards(cardValue,cardSuit));
+            count++;
+        }}
+    }
 
     String[] cards = {"2_of_clubs.png", "3_of_clubs.png", "4_of_clubs.png", "5_of_clubs.png",
             "6_of_clubs.png", "7_of_clubs.png", "8_of_clubs.png", "9_of_clubs.png", "10_of_clubs.png", "jack_of_clubs.png",

@@ -21,10 +21,7 @@ import java.util.Random;
 public class HelloController {
 
 //private Cards cardsClass = new Cards();
-public enum CardValue{placeHolder, Ace, Two, Three, Four, Five, Six,
-    Seven, Eight, Nine, Ten, Jack, Queen, King};
 
-public enum CardSuit{Clubs, Spades, Hearts, Diamonds};
 
 
     @FXML
@@ -181,7 +178,7 @@ public enum CardSuit{Clubs, Spades, Hearts, Diamonds};
     Random random = new Random();
     //I used the "Fisher Yates" shuffle algorithm
     public void shuffle(){
-        int count=0;
+
         int n = cards.length;
         Random random = new Random();
         for (int i = n - 1; i > 0; i--) {
@@ -191,12 +188,7 @@ public enum CardSuit{Clubs, Spades, Hearts, Diamonds};
             cards[j] = temp;
 
         }
-        for(Cards.CardSuit c : Cards.CardSuit.values()){
-            for(HelloController.CardValue v : HelloController.CardValue.values()){
-                cards[count]= String.valueOf(new HelloController(cardValue,cardSuit));
-                count++;
-            }
-        }
+
     }
 
 
