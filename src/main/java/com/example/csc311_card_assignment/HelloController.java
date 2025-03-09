@@ -51,6 +51,7 @@ public class HelloController {
     private TextField expressionBar;
 
     @FXML
+    //My verify this answer is correct action event
     void verifyAction(ActionEvent event) {
         try {
 
@@ -61,14 +62,14 @@ public class HelloController {
 
             //Google told me this was would fix my error when I just did result ==24
             if (Math.abs(result - 24.0) < 0.0001) {
-
+                //Alert if the answer equals 24
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Correct Answer");
                 alert.setHeaderText("Correct!");
                 alert.setContentText("The expression evaluates to 24.");
                 alert.showAndWait();
             } else {
-
+                //Alert if answer does not equal 24
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Incorrect");
                 alert.setHeaderText("Wrong Answer");
@@ -76,6 +77,7 @@ public class HelloController {
                 alert.showAndWait();
             }
         } catch (Exception e) {
+            //Alert for invalid expressions (blank field, or using operators besides - + / *)
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Invalid Expression");
@@ -86,19 +88,15 @@ public class HelloController {
 
 //I pulled this method off google to evaluate my expression
     private double evaluateExpression(String expression) {
-        try {
-
-            expression = expression.replaceAll("\\s+", "");
-
-
+        try { expression = expression.replaceAll("\\s+", "");
             String finalExpression = expression;
             return new Object() {
                 int pos = -1, ch;
-
+                //moves down the list of characters from the answer text field
                 void nextChar() {
                     ch = (++pos < finalExpression.length()) ? finalExpression.charAt(pos) : -1;
                 }
-
+                //gets rid of spaces to help check the expression
                 boolean eat(int charToEat) {
                     while (ch == ' ') nextChar();
                     if (ch == charToEat) {
@@ -107,15 +105,14 @@ public class HelloController {
                     }
                     return false;
                 }
-
+                //Checking for characters we are not willing to take in for the answer
                 double parse() {
                     nextChar();
                     double x = parseExpression();
                     if (pos < finalExpression.length()) throw new RuntimeException("Unexpected: " + (char)ch);
                     return x;
                 }
-
-
+                //Checking for addition and subtraction
                 double parseExpression() {
                     double x = parseTerm();
                     for (;;) {
@@ -124,7 +121,7 @@ public class HelloController {
                         else return x;
                     }
                 }
-
+                //Checking for multipliactiona and division (the example I looked at kept these expressions seperate from + and -)
                 double parseTerm() {
                     double x = parseFactor();
                     for (;;) {
@@ -133,7 +130,7 @@ public class HelloController {
                         else return x;
                     }
                 }
-
+                //Method for the actual math
                 double parseFactor() {
                     if (eat('+')) return parseFactor(); // unary plus
                     if (eat('-')) return -parseFactor(); // unary minus
@@ -156,7 +153,7 @@ public class HelloController {
             throw new RuntimeException("Invalid expression: " + e.getMessage());
         }
     }
-
+    //My actual array of card image files
     String[] cards={"2_of_clubs.png", "3_of_clubs.png", "4_of_clubs.png", "5_of_clubs.png",
             "6_of_clubs.png", "7_of_clubs.png", "8_of_clubs.png", "9_of_clubs.png", "10_of_clubs.png", "jack_of_clubs.png",
             "queen_of_clubs.png", "king_of_clubs.png", "ace_of_clubs.png", "2_of_diamonds.png",
@@ -172,10 +169,11 @@ public class HelloController {
 
 
 
-
+    //Random operator to which will be used to randomize the cards
     Random random = new Random();
     private int[] currentCardValues = new int[4];
-    //I used the "Fisher Yates" shuffle algorithm to stick with just an array
+    //Shuffle cards method
+    //I used the "Fisher Yates" shuffle algorithm to stick with just an array instead of using a list
     public void shuffle(){
 
         int n = cards.length;
@@ -200,13 +198,13 @@ public class HelloController {
         fourthCard.setImage(new Image(cards[1]));
         secondCard.setImage(new Image(cards[2]));
         thirdCard.setImage(new Image(cards[3]));
-        // Update the current card values
+        // Update the current card values with objects
         currentCardValues[0] = getValueFromCardFile(cards[0]);
         currentCardValues[1] = getValueFromCardFile(cards[1]);
         currentCardValues[2] = getValueFromCardFile(cards[2]);
         currentCardValues[3] = getValueFromCardFile(cards[3]);
     }
-
+    //The actual method of adding the values to the cards objects
     private int getValueFromCardFile(String cardFile) {
         String valuePart = cardFile.split("_")[0].toLowerCase();
         switch (valuePart) {
@@ -222,11 +220,12 @@ public class HelloController {
     @FXML
         // Build a list of expression objects from the current card values
     void hintAction(ActionEvent event) {
+        //Ending up  having to use a ArrayList even though I avoided it for my cards.
         List<Expression> exprList = new ArrayList<>();
         for (int value : currentCardValues) {
             exprList.add(new Expression(value, Integer.toString(value)));
         }
-        String solution = solutionSolva(exprList);
+        String solution = solutionSolver(exprList);
         if (solution != null) {
             hintField.setText(solution);
         } else {
@@ -243,20 +242,19 @@ public class HelloController {
         }
     }
 
-
-    private String solutionSolva(List<Expression> expressions) {
+    //Method to find hint solutions
+    private String solutionSolver(List<Expression> expressions) {
         if (expressions.size() == 1) {
             if (Math.abs(expressions.get(0).value - 24) < 1e-6) {
                 return expressions.get(0).expression;
             }
             return null;
         }
-        // Runs through all possile expressions
+        // Runs through all possible expressions and keeps them in a list
         for (int i = 0; i < expressions.size(); i++) {
             for (int j = i + 1; j < expressions.size(); j++) {
                 Expression a = expressions.get(i);
                 Expression b = expressions.get(j);
-
                 List<Expression> possibleResults = new ArrayList<>();
                 possibleResults.add(new Expression(a.value + b.value, "(" + a.expression + "+" + b.expression + ")"));
                 possibleResults.add(new Expression(a.value - b.value, "(" + a.expression + "-" + b.expression + ")"));
@@ -269,17 +267,17 @@ public class HelloController {
                     possibleResults.add(new Expression(b.value / a.value, "(" + b.expression + "/" + a.expression + ")"));
                 }
 
-                // For each possible result, create a new list and try to solve further.
+                // For each possible result, creates another list and tries to solve further.
                 for (Expression candidate : possibleResults) {
                     List<Expression> nextList = new ArrayList<>();
-                    // Add the remaining expressions.
+                    // Adds the remaining expressions.
                     for (int k = 0; k < expressions.size(); k++) {
                         if (k != i && k != j) {
                             nextList.add(expressions.get(k));
                         }
                     }
                     nextList.add(candidate);
-                    String solution = solutionSolva(nextList);
+                    String solution = solutionSolver(nextList);
                     if (solution != null) {
                         return solution;
                     }
