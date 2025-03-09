@@ -4,29 +4,19 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.VBox;
 
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Random;
 
-public class HelloController {
+public class CardGameController {
 
 
 
-
-
-    @FXML
-    private VBox Main_vbox;
 
     @FXML
     private TextField hintField;
@@ -37,8 +27,6 @@ public class HelloController {
     @FXML
     private ImageView fourthCard;
 
-    @FXML
-    private Button hintButton;
 
     @FXML
     private ImageView secondCard;
