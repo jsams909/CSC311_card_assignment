@@ -3,20 +3,15 @@ package com.example.csc311_card_assignment;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class CardGameController {
-
-
-
 
     @FXML
     private TextField hintField;
@@ -80,11 +75,11 @@ public class CardGameController {
             String finalExpression = expression;
             return new Object() {
                 int pos = -1, ch;
-                //moves down the list of characters from the answer text field
+                //Moves down the list of characters from the answer text field
                 void nextChar() {
                     ch = (++pos < finalExpression.length()) ? finalExpression.charAt(pos) : -1;
                 }
-                //gets rid of spaces to help check the expression
+                //Gets rid of spaces to help check the expression
                 boolean eat(int charToEat) {
                     while (ch == ' ') nextChar();
                     if (ch == charToEat) {
@@ -220,7 +215,7 @@ public class CardGameController {
             hintField.setText("No solution exists for these cards.");
         }
     }
-
+    //Class that creates variables for the hint function
     private class Expression {
         double value;
         String expression;
