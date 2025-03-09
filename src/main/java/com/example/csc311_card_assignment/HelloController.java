@@ -14,13 +14,14 @@ import javafx.scene.layout.VBox;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 
 public class HelloController {
 
-//private Cards cardsClass = new Cards();
+
 
 
 
@@ -28,7 +29,7 @@ public class HelloController {
     private VBox Main_vbox;
 
     @FXML
-    private Button drawButton;
+    private TextField hintField;
 
     @FXML
     private ImageView firstCard;
@@ -45,8 +46,6 @@ public class HelloController {
     @FXML
     private ImageView thirdCard;
 
-    @FXML
-    private Button verifyButton;
 
     @FXML
     private TextField expressionBar;
@@ -150,7 +149,6 @@ public class HelloController {
                     } else {
                         throw new RuntimeException("Unexpected: " + (char)ch);
                     }
-
                     return x;
                 }
             }.parse();
@@ -176,7 +174,8 @@ public class HelloController {
 
 
     Random random = new Random();
-    //I used the "Fisher Yates" shuffle algorithm
+    private int[] currentCardValues = new int[4];
+    //I used the "Fisher Yates" shuffle algorithm to stick with just an array
     public void shuffle(){
 
         int n = cards.length;
@@ -193,6 +192,7 @@ public class HelloController {
 
 
     @FXML
+    //Pulls cards and calls shuffle method to shuffle them
     void drawCards(MouseEvent event) {
 
         shuffle();
@@ -200,6 +200,94 @@ public class HelloController {
         fourthCard.setImage(new Image(cards[1]));
         secondCard.setImage(new Image(cards[2]));
         thirdCard.setImage(new Image(cards[3]));
+        // Update the current card values
+        currentCardValues[0] = getValueFromCardFile(cards[0]);
+        currentCardValues[1] = getValueFromCardFile(cards[1]);
+        currentCardValues[2] = getValueFromCardFile(cards[2]);
+        currentCardValues[3] = getValueFromCardFile(cards[3]);
+    }
 
-    }}
+    private int getValueFromCardFile(String cardFile) {
+        String valuePart = cardFile.split("_")[0].toLowerCase();
+        switch (valuePart) {
+            case "ace": return 1;
+            case "jack": return 11;
+            case "queen": return 12;
+            case "king": return 13;
+            default: return Integer.parseInt(valuePart); // for cards 2-10
+        }
+    }
 
+
+    @FXML
+        // Build a list of expression objects from the current card values
+    void hintAction(ActionEvent event) {
+        List<Expression> exprList = new ArrayList<>();
+        for (int value : currentCardValues) {
+            exprList.add(new Expression(value, Integer.toString(value)));
+        }
+        String solution = solutionSolva(exprList);
+        if (solution != null) {
+            hintField.setText(solution);
+        } else {
+            hintField.setText("No solution exists for these cards.");
+        }
+    }
+
+    private class Expression {
+        double value;
+        String expression;
+        Expression(double value, String expr) {
+            this.value = value;
+            this.expression = expr;
+        }
+    }
+
+
+    private String solutionSolva(List<Expression> expressions) {
+        if (expressions.size() == 1) {
+            if (Math.abs(expressions.get(0).value - 24) < 1e-6) {
+                return expressions.get(0).expression;
+            }
+            return null;
+        }
+        // Runs through all possile expressions
+        for (int i = 0; i < expressions.size(); i++) {
+            for (int j = i + 1; j < expressions.size(); j++) {
+                Expression a = expressions.get(i);
+                Expression b = expressions.get(j);
+
+                List<Expression> possibleResults = new ArrayList<>();
+                possibleResults.add(new Expression(a.value + b.value, "(" + a.expression + "+" + b.expression + ")"));
+                possibleResults.add(new Expression(a.value - b.value, "(" + a.expression + "-" + b.expression + ")"));
+                possibleResults.add(new Expression(b.value - a.value, "(" + b.expression + "-" + a.expression + ")"));
+                possibleResults.add(new Expression(a.value * b.value, "(" + a.expression + "*" + b.expression + ")"));
+                if (Math.abs(b.value) > 1e-6) {
+                    possibleResults.add(new Expression(a.value / b.value, "(" + a.expression + "/" + b.expression + ")"));
+                }
+                if (Math.abs(a.value) > 1e-6) {
+                    possibleResults.add(new Expression(b.value / a.value, "(" + b.expression + "/" + a.expression + ")"));
+                }
+
+                // For each possible result, create a new list and try to solve further.
+                for (Expression candidate : possibleResults) {
+                    List<Expression> nextList = new ArrayList<>();
+                    // Add the remaining expressions.
+                    for (int k = 0; k < expressions.size(); k++) {
+                        if (k != i && k != j) {
+                            nextList.add(expressions.get(k));
+                        }
+                    }
+                    nextList.add(candidate);
+                    String solution = solutionSolva(nextList);
+                    if (solution != null) {
+                        return solution;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+
+}

@@ -84,24 +84,7 @@ public class Cards {
 
          }
      }
-/**
 
-    public void cards() {
-        this.deck = new ArrayList<String>();
-        this.answer = "";
-    }
-    public void generateCards(){
-        //this.deck.clear();
-    //ImageView[] currentCards = new ImageView[4];
-        for(int i = 0; i<4; i++){
-        int randomCard = random.nextInt(52);  // Get a random index
-            while (this.deck.contains(cards[randomCard])) {
-                randomCard = random.nextInt(cards.length);
-            }
-            this.deck.add(cards[randomCard]);
-      // Image card = new Image("file:" + cards[randomCard]);  // Load the random image
-        //currentCards[i] = new ImageView(card);
- }}*/
 
 
 

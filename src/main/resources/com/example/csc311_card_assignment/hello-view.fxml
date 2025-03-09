@@ -12,7 +12,7 @@
    <children>
       <HBox prefHeight="45.0" prefWidth="600.0">
          <children>
-            <Button fx:id="hintButton" mnemonicParsing="false" prefHeight="24.0" prefWidth="78.0" text="Hint">
+            <Button fx:id="hintButton" mnemonicParsing="false" onAction="#hintAction" prefHeight="24.0" prefWidth="78.0" text="Hint">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -20,9 +20,14 @@
                   <Insets left="10.0" top="5.0" />
                </HBox.margin>
             </Button>
+            <TextField fx:id="hintField">
+               <HBox.margin>
+                  <Insets left="100.0" top="5.0" />
+               </HBox.margin>
+            </TextField>
             <Button fx:id="drawButton" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#drawCards" prefHeight="26.0" prefWidth="73.0" text="Draw">
                <HBox.margin>
-                  <Insets bottom="5.0" left="400.0" top="5.0" />
+                  <Insets bottom="5.0" left="180.0" top="5.0" />
                </HBox.margin>
             </Button>
          </children>
