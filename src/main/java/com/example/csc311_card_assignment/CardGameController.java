@@ -22,7 +22,6 @@ public class CardGameController {
     @FXML
     private ImageView fourthCard;
 
-
     @FXML
     private ImageView secondCard;
 
@@ -104,7 +103,7 @@ public class CardGameController {
                         else return x;
                     }
                 }
-                //Checking for multipliactiona and division (the example I looked at kept these expressions seperate from + and -)
+                //Checking for multiplication and division (the example I looked at kept these expressions separate from + and -)
                 double parseTerm() {
                     double x = parseFactor();
                     for (;;) {
@@ -203,7 +202,7 @@ public class CardGameController {
     @FXML
         // Build a list of expression objects from the current card values
     void hintAction(ActionEvent event) {
-        //Ending up  having to use a ArrayList even though I avoided it for my cards.
+        //Ending up  having to use a ArrayList even though I avoided it for my cards
         List<Expression> exprList = new ArrayList<>();
         for (int value : currentCardValues) {
             exprList.add(new Expression(value, Integer.toString(value)));
@@ -250,7 +249,7 @@ public class CardGameController {
                     possibleResults.add(new Expression(b.value / a.value, "(" + b.expression + "/" + a.expression + ")"));
                 }
 
-                // For each possible result, creates another list and tries to solve further.
+                // For each possible result, creates another list and tries to solve further
                 for (Expression candidate : possibleResults) {
                     List<Expression> nextList = new ArrayList<>();
                     // Adds the remaining expressions.
